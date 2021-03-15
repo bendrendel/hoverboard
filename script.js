@@ -1,27 +1,22 @@
 const board = document.querySelector('.board');
-const colors = ['#c54545', '#da7e41', '#5fa351', '#417aa0', '#6d5397'];
+const colors = ['#e74c3c', '#8e44ad', '#3498db', '#e67e22', '#2ecc71'];
+const numPixels = 500;
 
-for (let i = 0; i < 500; i++) {
-    let pixel = document.createElement('div');
+for (let i = 0; i < numPixels; i++) {
+    const pixel = document.createElement('div');
+
     pixel.classList = 'pixel';
-    board.append(pixel);
-}
-
-const pixels = document.querySelectorAll('.pixel');
-
-pixels.forEach((pixel) => {
+    
     pixel.addEventListener('mouseenter', (e) => {
         const randomColor = colors[Math.floor(Math.random() * colors.length)];
-        e.target.style.transition = '';
         e.target.style.backgroundColor = randomColor;
-        e.target.style.boxShadow = '0 0 1px 0.75px' + randomColor;
+        e.target.style.boxShadow = `0 0 2px ${randomColor}, 0 0 10px ${randomColor}`;
     });
-});
 
-pixels.forEach((pixel) => {
     pixel.addEventListener('mouseleave', (e) => {
-        e.target.style.transition = 'all 2s ease-out';
-        e.target.style.backgroundColor = '#222';
-        e.target.style.boxShadow = 'none';
+        e.target.style.backgroundColor = '#1d1d1d';
+        e.target.style.boxShadow = '0 0 2px #000';
     });
-});
+    
+    board.appendChild(pixel);
+}
